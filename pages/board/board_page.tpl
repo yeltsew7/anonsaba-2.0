@@ -81,7 +81,7 @@
 					{% if post.rw == 1 %}
 						{{post.message|raw}}
 					{% else %}
-						{{post.message|e}}
+						{{post.message|nl2br}}
 					{% endif %}
 				</blockquote>
 				<span class="omittedposts">
@@ -177,11 +177,11 @@
 										</span>
 								{% endif %}
 							{% endfor %}
-							<blockquote>&nbsp;&nbsp;
+							<blockquote>
 								{% if post.rw == 1 %}
 									{{post.message|raw}}
 								{% else %}
-									{{post.message|e}}
+									{{post.message|nl2br}}
 								{% endif %}
 							</blockquote>
 						</td>

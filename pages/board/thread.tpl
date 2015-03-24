@@ -46,8 +46,12 @@
 					ID: {{post.ipid|slice(0, 6)}}
 				{% endif %}
 				[<a href="{{fullpath}}/index.php?reply={{post.id}}">Reply</a>]
-				<blockquote>
-					&nbsp;&nbsp;{{post.message|raw}}
+				<blockquote>&nbsp;&nbsp;
+					{% if post.rw == 1 %}
+						{{post.message|raw}}
+					{% else %}
+						{{post.message|nl2br}}
+					{% endif %}
 				</blockquote>
 				<br />
 		{% else %}
@@ -103,7 +107,7 @@
 								{% if post.rw == 1 %}
 									{{post.message|raw}}
 								{% else %}
-									{{post.message|e}}
+									{{post.message|nl2br}}
 								{% endif %}
 							</blockquote>
 					</td>
