@@ -17,7 +17,7 @@
 					<input type="checkbox" name="post[]" value="{{post.id}}" />
 					{% if post.subject != '' %}
 						<span class="filetitle">
-							{{post.subject|raw}}{{timgw}}
+							{{post.subject|raw}}
 						</span>
 					{% endif %}
 					{% spaceless %}
