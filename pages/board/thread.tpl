@@ -45,7 +45,7 @@
 				{% if board.showid %}
 					ID: {{post.ipid|slice(0, 6)}}
 				{% endif %}
-				[<a href="{{fullpath}}/index.php?reply={{post.id}}">Reply</a>]
+				[Replying]
 				<blockquote>&nbsp;&nbsp;
 					{% if post.rw == 1 %}
 						{{post.message|raw}}
