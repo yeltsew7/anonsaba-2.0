@@ -2,6 +2,7 @@
 	<link href="/pages/css/manage.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 {% block content %}
+	<title>{{sitename}} - Management</title>
 	<section class="content_wrap">
 	<header id="">
 	<section id="top">
