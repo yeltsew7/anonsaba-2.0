@@ -99,7 +99,12 @@
 								{% endif %}
 							{% endfor %}
 							<blockquote>
-								&nbsp;&nbsp;{{post.message|raw}}
+								&nbsp;&nbsp;
+								{% if post.rw == 1 %}
+									{{post.message|raw}}
+								{% else %}
+									{{post.message|e}}
+								{% endif %}
 							</blockquote>
 					</td>
 				</tr>
