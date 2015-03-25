@@ -92,6 +92,11 @@ if (isset($_POST['submit'])) {
 			} else {
 				$ipaddy = $_SERVER['REMOTE_ADDR'];
 			}
+			$bancheck = $db->GetOne('SELECT `boards` FROM `'.bans.'` WHERE `ip` = '.$db->quote($ipaddy));
+			$boards = explode('|', $bancheck);
+			if (in_array($_POST['board'], $boards) || $boards[0] == 'all') {
+				AnonsabaCore::Banned($ipaddy);
+			}
 			if ($_FILES['imagefile']['error'][0] == '4' && !$_POST['nofile'] && $_POST['replythread'] == 0) {
 				AnonsabaCore::Error('Sorry', 'Please select a file to upload');
 			}

@@ -88,4 +88,12 @@ class AnonsabaCore {
 		}
 		return $msg;
 	}
+	public static function Banned($ip) {
+		global $db, $twig, $twig_date;
+		$twig_data['sitename'] = self::GetConfigOption('sitename');
+		$twig_data['version'] = self::GetConfigOption('version');
+		$twig_data['bans'] = $db->GetAll('SELECT * FROM `'.prefix.'bans` WHERE `ip` = '.$db->quote($ip));
+		self::Output('/banned.tpl', $twig_data);
+		die();
+	}	
 }
