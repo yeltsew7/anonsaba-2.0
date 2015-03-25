@@ -147,6 +147,7 @@ class Management {
 			$twig_data['msg'] = '<font color="green">Successfully marked message as read!</font>';
 			$twig_data['messages'] = $db->GetAll('SELECT * FROM `'.prefix.'pms` WHERE `to` = '.$db->quote($_SESSION['manageusername']).' ORDER BY `read` ASC, `time` DESC');
 		} elseif ($_GET['do'] == 'reply') {
+			$db->Execute('UPDATE `'.prefix.'pms` SET `read` = 1 WHERE `id` = '.$_GET['id']);
 			$twig_data['messages'] = $db->GetAll('SELECT * FROM `'.prefix.'pms` WHERE `id` = '.$_GET['id']);
 		} else {
 			$twig_data['messages'] = $db->GetAll('SELECT * FROM `'.prefix.'pms` WHERE `to` = '.$db->quote($_SESSION['manageusername']).' ORDER BY `read` ASC, `time` DESC');
@@ -738,6 +739,7 @@ if ($_POST['subject'] != '') {
 		$twig_data['boardname'] = isset($_GET['boardname']) ? $_GET['boardname'] : '';
 		$twig_data['bans'] = $db->GetAll('SELECT * FROM `'.prefix.'bans`');
 		$twig_data['current'] = $_GET['side'];
+		$twig_data['tb'] = $db->GetAll('SELECT * FROM `'.prefix.'bans`');
 		if ($_GET['act'] == 'del') {
 			$db->Execute('DELETE FROM `'.prefix.'bans` WHERE `id` = '.$_GET['id']);
 			$twig_data['msg'] = '<font color="green">Ban successfully delete</font>';
