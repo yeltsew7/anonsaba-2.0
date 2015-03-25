@@ -53,7 +53,7 @@ if (isset($_POST['submit'])) {
 				}
 				if (isset($_POST['lock']) && $_POST['replythread'] == 0) {
 					$lock = 1;
-				} else {
+				} elseif (isset($_POST['lock'])) {
 					$db->Execute('UPDATE `posts` SET `lock` = 1 WHERE `id` = '.$_POST['replythread'].' AND `boardname` = '.$db->quote($_POST['board']));
 				}
 				if (isset($_POST['rawhtml'])) {
