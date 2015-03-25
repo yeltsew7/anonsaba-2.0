@@ -65,7 +65,6 @@
 <th>IP</th>
 <th>Reason</th>
 <th>Banned until</th>
-<th>Boards</th>
 <th>Appeal date</th>
 <th>Appealed</th>
 <th>&nbsp;</th>
@@ -76,17 +75,16 @@
 <td>{{ban.ip}}</td>
 <td>{{ban.reason}}</td>
 <td>{{ban.until|date('m/d/y @ h:i:s A')}}</td>
-<td>{%if ban.boards == 'all' %}All boards {% else %}/{{ban.boards|replace({'|':'/, /'})}}/{% endif %}</td>
 <td>{% if ban.appeal == 0 %}Cannot Appeal{% else %}{{ban.appeal|date('m/d/y @ h:i:s A')}}{% endif %}</td>
-<td>{% if ban.appealed == null %}No{% else %}Yes{% endif %}</td>
-<td>[<a href="index.php?side={{current}}&action=bans&act=del&id={{ban.id}}"> Delete</a> ]</td>
+<td>fix</td>
+<td>fix links</td>
 </tbody>
 {%endfor%}
 </table>
 <center>
 {% if pages -1 > 0 %}
   {% for i in range(0, pages ) %}
-      [ {% if page != i %}<a href="/management/index.php?side={{current}}&action=bans&page={{i}}">{% endif %}{{i}}{% if page != i %}</a>{% endif %} ]
+      [ {% if page != i %}<a href="/management/index.php?side={{current}}&action=recentpost&page={{i}}">{% endif %}{{i}}{% if page != i %}</a>{% endif %} ]
   {% endfor %}
 {% else %}
 [ 0 ]

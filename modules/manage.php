@@ -735,6 +735,11 @@ if ($_POST['subject'] != '') {
 		$twig_data['ip'] = isset($_GET['ip']) ? $_GET['ip'] : '';
 		$twig_data['boardname'] = isset($_GET['boardname']) ? $_GET['boardname'] : '';
 		$twig_data['bans'] = $db->GetAll('SELECT * FROM `'.prefix.'bans`');
+		$twig_data['current'] = $_GET['side'];
+		if ($_GET['act'] == 'del') {
+			$db->Execute('DELETE FROM `'.prefix.'bans` WHERE `id` = '.$_GET['id']);
+			$twig_data['msg'] = '<font color="green">Ban successfully delete</font>';
+		}
 		if (isset($_POST['submit'])) {
 			if (isset($_POST['all'])) {
 				$ban_boards = array('all');
@@ -765,11 +770,12 @@ if ($_POST['subject'] != '') {
 			} else {
 				$twig_data['msg'] = '<font color="red">Please enter an IP to be banned!</font>';
 			}
+			AnonsabaCore::Output('/manage/moderation/bans.tpl', $twig_data);
 		} else {
 			$bans = $db->GetAll('SELECT * FROM `'.prefix.'bans`');
 			$twig_data['bans'] = $bans;
+			AnonsabaCore::Output('/manage/moderation/bans.tpl', $twig_data);
 		}
-		AnonsabaCore::Output('/manage/moderation/bans.tpl', $twig_data);
 	}
 	public static function appeal() {
 		global $twig_data, $db;
