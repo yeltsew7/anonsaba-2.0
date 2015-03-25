@@ -45,7 +45,6 @@
 				{% if board.showid %}
 					ID: {{post.ipid|slice(0, 6)}}
 				{% endif %}
-				[Replying]
 				<blockquote>&nbsp;&nbsp;
 					{% if post.rw == 1 %}
 						{{post.message|raw}}
@@ -103,7 +102,6 @@
 								{% endif %}
 							{% endfor %}
 							<blockquote>
-								&nbsp;&nbsp;
 								{% if post.rw == 1 %}
 									{{post.message|raw}}
 								{% else %}
