@@ -4,9 +4,11 @@ class Management {
 	public static function LoginForm() {
 		global $twig, $twig_data;
 		$twig_data['sitename'] = AnonsabaCore::GetConfigOption('sitename');
+		$twig_data['side'] = isset($_GET['side']) ? $_GET['side'] : 'main';
+		$twig_data['action'] = isset($_GET['action']) ? $_GET['action'] : 'stats';
 		AnonsabaCore::Output('/login.tpl', $twig_data);
 	}
-	public static function CheckLogin() {
+	public static function CheckLogin($side, $action) {
 		global $db;
 		$password = $db->GetOne('SELECT `password` FROM `'.prefix.'staff` WHERE `username` = '.$db->quote($_POST['username']));
 		$passhash = AnonsabaCore::Encrypt($_POST['password']);
@@ -21,7 +23,7 @@ class Management {
 			$_SESSION['manageusername'] = $_POST['username'];
 			self::CreateSession($_POST['username']);
 			AnonsabaCore::Log($_POST['username'], 'Logged in', time());
-			die('<script type="text/javascript">top.location.href = \'/management/index.php?side=main&action=stats\';</script>');
+			die('<script type="text/javascript">top.location.href = \'/management/index.php?side='.$side.'&action='.$action.'\';</script>');
 		} else {
 			AnonsabaCore::Log($_POST['username'], 'Failed login Attempt (IP: '.$_SERVER['REMOTE_ADDR'].')', time());
 			AnonsabaCore::Error('Incorrect Username/Password', 'This has been logged');
@@ -30,7 +32,7 @@ class Management {
 	public static function Logout() {
 		self::DestroySession($_SESSION['manageusername']);
 
-		die('<script type="text/javascript">top.location.href = \'/management/index.php\';</script>');
+		die('<script type="text/javascript">top.location.href = \'/management/\';</script>');
 	}
 	public static function CreateSession($val) {
 		global $db;

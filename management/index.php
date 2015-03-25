@@ -46,15 +46,15 @@ if ($management->ValidateSession(true)) {
 //Run this each time someone logs in...
 $management->ExpireBans();
 //Don't touch this
-$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'stats';
+$action = isset($_GET['action']) ? $_GET['action'] : 'stats';
+$side = isset($_GET['side']) ? $_GET['side'] : 'main';
+if (isset($_GET['act'])) {
+	$management->CheckLogin($side, $action);
+	$management->ValidateSession();
+}
 switch ($action) {
 	case 'logout':
 		$management->Logout();
-		break;
-	case 'login':
-		$management->CheckLogin();
-		$management->ValidateSession();
-		page();
 		break;
 	case 'getip':
 		$management->ValidateSession(true);
