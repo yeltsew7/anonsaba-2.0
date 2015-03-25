@@ -782,6 +782,17 @@ if ($_POST['subject'] != '') {
 
 		AnonsabaCore::Output('/manage/moderation/appeal.tpl', $twig_data);
 	}
+	public static function ExpireBans() {
+		global $db;
+		$time = time();
+		$bans = $db->GetAll('SELECT * FROM `'.prefix.'bans` WHERE `until` <= '.$time);
+		if ($bans) {
+			foreach($bans as $line) {
+				$db->Execute('INSERT INTO `'.prefix.'expiredbans` (`ip`, `reason`) VALUES ('.$db->quote($line['ip']).', '.$db->quote($line['reason']).')');
+			}
+			$db->Execute('DELETE FROM `'.prefix.'bans` WHERE `until` <= '.$time);
+		}
+	}
 	public static function memory() {
 		return substr(memory_get_peak_usage() / 1024 / 1024, 0, 4);
 	}

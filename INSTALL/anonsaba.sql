@@ -97,11 +97,11 @@ CREATE TABLE IF NOT EXISTS `board_filetypes` (
 --
 
 CREATE TABLE IF NOT EXISTS `expiredbans` (
-  `id` int(11) NOT NULL DEFAULT '0',
-  `ip` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ip` mediumtext NOT NULL,
   `reason` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 

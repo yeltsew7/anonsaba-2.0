@@ -43,6 +43,8 @@ if ($management->ValidateSession(true)) {
 		$twig_data['url'] = array('&action=bans', '&action=reports', '&action=appeal', '&action=recentpost');
 	}
 }
+//Run this each time someone logs in...
+$management->ExpireBans();
 //Don't touch this
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'stats';
 switch ($action) {
