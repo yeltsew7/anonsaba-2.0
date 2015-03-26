@@ -45,6 +45,7 @@
 				{% if board.showid %}
 					ID: {{post.ipid|slice(0, 6)}}
 				{% endif %}
+				<span id="dnb-{{board.name}}-{{post.id}}"></span>
 				<blockquote>&nbsp;&nbsp;
 					{% if post.rw == 1 %}
 						{{post.message|raw}}
@@ -101,6 +102,7 @@
 									<img src="{{url}}{{board.name}}/src/{{file.file}}{{file.type}}" height="150" width="150">
 								{% endif %}
 							{% endfor %}
+							<span id="dnb-{{board.name}}-{{post.id}}"></span>
 							<blockquote>
 								{% if post.rw == 1 %}
 									{{post.message|raw}}
