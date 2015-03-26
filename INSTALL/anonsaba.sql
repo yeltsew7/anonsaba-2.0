@@ -197,6 +197,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `rw` int(11) NOT NULL DEFAULT '0',
   `deleted_time` int(12) NOT NULL,
   `bumped` int(12) NOT NULL,
+  `cleared` int(11) NOT NULL DEFAULT '0',
   `report` int(11) NOT NULL,
   `reportmsg` text NOT NULL,
   KEY `id` (`id`)
