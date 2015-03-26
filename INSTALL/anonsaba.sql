@@ -3,18 +3,12 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 24, 2015 at 07:58 PM
+-- Generation Time: Mar 25, 2015 at 09:11 PM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `anonsaba`
@@ -35,9 +29,9 @@ CREATE TABLE IF NOT EXISTS `bans` (
   `appeal` int(11) DEFAULT NULL,
   `appealed` int(11) DEFAULT NULL,
   `appealmsg` text NOT NULL,
+  `deny` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
-
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 -- --------------------------------------------------------
 
@@ -75,7 +69,6 @@ CREATE TABLE IF NOT EXISTS `boards` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=118 ;
 
-
 -- --------------------------------------------------------
 
 --
@@ -88,7 +81,6 @@ CREATE TABLE IF NOT EXISTS `board_filetypes` (
   `fileid` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=502 ;
-
 
 -- --------------------------------------------------------
 
@@ -119,7 +111,6 @@ CREATE TABLE IF NOT EXISTS `files` (
   `size` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
 -- --------------------------------------------------------
 
 --
@@ -132,15 +123,6 @@ CREATE TABLE IF NOT EXISTS `filetypes` (
   `image` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `filetypes`
---
-
-INSERT INTO `filetypes` (`id`, `name`, `image`) VALUES
-(1, 'JPG', ''),
-(2, 'PNG', ''),
-(3, 'GIF', '');
 
 -- --------------------------------------------------------
 
@@ -171,8 +153,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `message` varchar(999) NOT NULL,
   `time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1518 ;
-
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1543 ;
 
 -- --------------------------------------------------------
 
@@ -189,8 +170,7 @@ CREATE TABLE IF NOT EXISTS `pms` (
   `time` int(11) NOT NULL,
   `read` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
-
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -218,9 +198,10 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `deleted_time` int(12) NOT NULL,
   `bumped` int(12) NOT NULL,
   `cleared` int(11) NOT NULL DEFAULT '0',
+  `report` int(11) NOT NULL,
+  `reportmsg` text NOT NULL,
   KEY `id` (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
-
 
 -- --------------------------------------------------------
 
@@ -237,7 +218,6 @@ CREATE TABLE IF NOT EXISTS `sections` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
-
 -- --------------------------------------------------------
 
 --
@@ -248,7 +228,6 @@ CREATE TABLE IF NOT EXISTS `siteconfig` (
   `config_name` varchar(999) NOT NULL,
   `config_value` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
 
 -- --------------------------------------------------------
 
@@ -266,8 +245,7 @@ CREATE TABLE IF NOT EXISTS `staff` (
   `suspended` int(11) NOT NULL,
   `boards` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
-
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 -- --------------------------------------------------------
 
@@ -283,7 +261,3 @@ CREATE TABLE IF NOT EXISTS `wordfilters` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

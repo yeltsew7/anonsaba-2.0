@@ -20,6 +20,21 @@ if (isset($_POST['delpost'])) {
 	$board_core->RefreshAll();
 	header("Location: ".url.$_POST['board']);
 }
+if (isset($_POST['reportpost'])) {
+	foreach ($posts as $post) {
+		$reportcheck = $db->GetAll('SELECT * FROM `'.prefix.'posts` WHERE `id` = '.$post.' AND `boardname` = '.$db->quote($_POST['board']));
+		foreach ($reportcheck as $line) {
+			if ($line['report'] == 1) {
+				echo '<link rel="stylesheet" type="text/css" href="'.url.'pages/css/futaba.css"><h2>This post is currently being validated';
+			} elseif ($line['report'] == 2) {
+				echo '<link rel="stylesheet" type="text/css" href="'.url.'pages/css/futaba.css"><h2>This post was already reported and cleared';
+			} else {
+				$db->Execute('UPDATE `'.prefix.'posts` SET `report` = 1, `reportmsg` = '.$db->quote($_POST['reportreason']).' WHERE `id` = '.$post.' AND `boardname` = '.$db->quote($_POST['board']));
+				echo '<link rel="stylesheet" type="text/css" href="'.url.'pages/css/futaba.css"><h2>Post successfully reported';
+			}
+		}
+	}
+}
 if ($_GET['action'] == 'appeal') {
 	$db->Execute('UPDATE `'.prefix.'bans` SET `appealmsg` = '.$db->quote($_POST['appealmsg']).', `appealed` = 1 WHERE `id` = '.$_GET['id']);
 	AnonsabaCore::Banned($_GET['board'], $_GET['ip'], 1);

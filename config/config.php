@@ -13,7 +13,7 @@
 	$config['type'] = 'mysql'; //MySQL currently only supported because fuck you
 	$config['socket'] = false; //Is the DB host going to be a Unix Socket?
 	$config['host'] = 'localhost';
-	$config['database'] = '';//The database to use for Anonsaba
+	$config['database'] = 'anonsaba';//The database to use for Anonsaba
 	$config['user'] = 'root';//Database username
 	$config['pass'] = '';//Database password
 	$config['prefix'] = '';//Prefix for the tables? IE-ANONSABA_
@@ -27,14 +27,14 @@
 	$config['cache'] = $config['fullpath'].'pages_cache';
 	//Security measures
 	$config['rootnum'] = 1;//How many root users do you want? I highly suggest only having one, but Anonsaba is all about you...
-	$config['root'] = 'grumpy';//The root username you want to use *IF USING MORE THAN ONE ROOT USER LEAVE THIS BLANK*
-	//$config['mulroot'] = 'parley, grumpy';//If you intend on having more than one root put them all here seperate with commas
+	$config['root'] = 'root';//The root username you want to use *IF USING MORE THAN ONE ROOT USER LEAVE THIS BLANK*
+	//$config['mulroot'] = '';//If you intend on having more than one root put them all here seperate with commas
 	$config['spam'] = true;//Do you want to use built in spam filter? (Idk why the hell i'm even adding this option)
 	//Other configuration
 	$config['salt'] = '';//Enter some random numbers here 15 or more will do (Dead serious it's gonna count for 15 so slam on your keyboard)
 	$config['hash'] = '';//KU_RANDOMSEED but now called 'hash' because fuck you 15 or more
 	//Debug mode (Yea I moved this back into the config file)
-	$config['debug'] = true;
+	$config['debug'] = false;
 
 	//Just leave everything down here alone...
 	if (!isset($db)) {

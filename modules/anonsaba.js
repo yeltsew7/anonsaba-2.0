@@ -337,3 +337,9 @@ window.onload=function() {
     }	*/
 	document.onkeydown = keypress;
 }
+function reppop(a) {
+	day=new Date();
+	id=day.getTime();
+	window.open(a,id,"toolbar=0,scrollbars=0,location=0,status=1,menubar=0,resizable=1,width=685,height=200");
+	return false;
+}

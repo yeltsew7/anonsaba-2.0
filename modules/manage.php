@@ -797,6 +797,17 @@ if ($_POST['subject'] != '') {
 			AnonsabaCore::Output('/manage/moderation/appeal.tpl', $twig_data);
 		}
 	}
+	public static function reports() {
+		global $twig_data, $db;
+		$twig_data['reports'] = $db->GetAll('SELECT * FROM `'.prefix.'posts` WHERE `report` = 1');
+		if ($_GET['act'] == 'clear') {
+			$db->Execute('UPDATE `'.prefix.'posts` SET `report` = 2 WHERE `id` = '.$_GET['id'].' AND `boardname` = '.$db->quote($_GET['board']));
+			$twig_data['msg'] = '<font color="green">Report successfully cleared</font>';
+			AnonsabaCore::Output('/manage/moderation/reports.tpl', $twig_data);
+		} else {
+			AnonsabaCore::Output('/manage/moderation/reports.tpl', $twig_data);
+		}
+	}
 	public static function ExpireBans() {
 		global $db;
 		$time = time();

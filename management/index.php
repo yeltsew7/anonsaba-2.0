@@ -48,7 +48,7 @@ $management->ExpireBans();
 //Don't touch this
 $action = isset($_GET['action']) ? $_GET['action'] : 'stats';
 $side = isset($_GET['side']) ? $_GET['side'] : 'main';
-if (isset($_GET['act'])) {
+if (isset($_GET['acti'])) {
 	$management->CheckLogin($side, $action);
 	$management->ValidateSession();
 }
