@@ -27,34 +27,6 @@ Can Appeal? {% if ban.appeal != 0 %}Yes{% else %}No{% endif %}
 <br />
 Can Appeal on: {{ban.appeal|date('m/d/y @ h:i:s A')}}
 {% endif %}
-{% if ban.appeal <= time %}
-	{% if ban.appealmsg == '' %}
-		<br /><br />
-		<h2 style="font-size: 2em;font-weight: bold;">
-			Appeal
-		</h2><br />
-		Appeal Message:<br />
-		<form method="post" action="post.php?action=appeal&ip={{ban.ip}}&id={{ban.id}}&board={{board}}">
-		<textarea name="appealmsg" cols="48" rows="4"></textarea><input type="submit" name="submit" value="Submit" />
-		</form>
-	{% endif %}
-	{% if ban.appealmsg != '' %}
-		<br /><br />
-		<h2 style="font-size: 2em;font-weight: bold;">
-			Appeal
-		</h2><br />
-		{% if msg != '' %}
-			{{msg|raw}}<br />
-			Click <a href="{{loc}}">here</a> to return.
-		{% elseif msg == '' and ban.deny == 0 %}
-			You're appeal is currently being processed. Please check back later!<br />
-			Click <a href="{{location}}">here</a> to return.
-		{% elseif msg == '' and ban.deny == 1 %}
-			I'm sorry but your appeal was denied you may resume posting on {{ban.until|date('m/d/y @ h:i:s A')}}<br />
-			Click <a href="{{location}}">here</a> to return.
-		{% endif %}
-	{% endif %}
-{% endif %}
 {% endfor %}
 <div style="text-align: center;width: 100%;position: absolute;bottom: 10px;">
 <br />

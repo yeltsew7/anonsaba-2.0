@@ -88,11 +88,20 @@ class AnonsabaCore {
 		}
 		return $msg;
 	}
-	public static function Banned($ip) {
+	public static function Banned($board='', $ip, $appealed='') {
 		global $db, $twig, $twig_date;
 		$twig_data['sitename'] = self::GetConfigOption('sitename');
 		$twig_data['version'] = self::GetConfigOption('version');
 		$twig_data['bans'] = $db->GetAll('SELECT * FROM `'.prefix.'bans` WHERE `ip` = '.$db->quote($ip));
+		$twig_data['time'] = time();
+		$twig_data['loc'] = isset($_GET['board']) ? url.$_GET['board'] : '';
+		$twig_data['location'] = url.$board;
+		if ($board != '' ) {
+			$twig_data['board'] = $board;
+		}
+		if ($appealed != '') {
+			$twig_data['msg'] = '<font color="green">Appeal successfully sent!</font>';
+		}
 		self::Output('/banned.tpl', $twig_data);
 		die();
 	}	

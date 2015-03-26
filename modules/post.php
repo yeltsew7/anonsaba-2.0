@@ -20,10 +20,6 @@ if (isset($_POST['delpost'])) {
 	$board_core->RefreshAll();
 	header("Location: ".url.$_POST['board']);
 }
-if ($_GET['action'] == 'appeal') {
-	$db->Execute('UPDATE `'.prefix.'bans` SET `appealmsg` = '.$db->quote($_POST['appealmsg']).', `appealed` = 1 WHERE `id` = '.$_GET['id']);
-	AnonsabaCore::Banned($_GET['board'], $_GET['ip'], 1);
-}
 if (isset($_POST['submit'])) {
 	foreach ($data as $line) {
 		if ($line['locked'] == 1) {
@@ -99,7 +95,7 @@ if (isset($_POST['submit'])) {
 			$bancheck = $db->GetOne('SELECT `boards` FROM `'.bans.'` WHERE `ip` = '.$db->quote($ipaddy));
 			$boards = explode('|', $bancheck);
 			if (in_array($_POST['board'], $boards) || $boards[0] == 'all') {
-				AnonsabaCore::Banned($_POST['board'], $ipaddy);
+				AnonsabaCore::Banned($ipaddy);
 			}
 			if ($_FILES['imagefile']['error'][0] == '4' && !$_POST['nofile'] && $_POST['replythread'] == 0) {
 				AnonsabaCore::Error('Sorry', 'Please select a file to upload');

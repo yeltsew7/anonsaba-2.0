@@ -21,7 +21,7 @@ input {
 <header>
 <div class="text"><h1>{{sitename}} Login</h1>
 </header>
-<form method="POST" action='index.php?acti=login&side={{side}}&action={{action}}'>
+<form method="POST" action='index.php?act=login&side={{side}}&action={{action}}'>
 <input type="text" name="username" placeholder="Username"/>
 <input type="password" name="password" placeholder="Password"/>
 <input type="submit" value="Log in">

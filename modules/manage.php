@@ -739,7 +739,6 @@ if ($_POST['subject'] != '') {
 		$twig_data['boardname'] = isset($_GET['boardname']) ? $_GET['boardname'] : '';
 		$twig_data['bans'] = $db->GetAll('SELECT * FROM `'.prefix.'bans`');
 		$twig_data['current'] = $_GET['side'];
-		$twig_data['tb'] = $db->GetAll('SELECT * FROM `'.prefix.'bans`');
 		if ($_GET['act'] == 'del') {
 			$db->Execute('DELETE FROM `'.prefix.'bans` WHERE `id` = '.$_GET['id']);
 			$twig_data['msg'] = '<font color="green">Ban successfully delete</font>';
@@ -783,8 +782,20 @@ if ($_POST['subject'] != '') {
 	}
 	public static function appeal() {
 		global $twig_data, $db;
-
-		AnonsabaCore::Output('/manage/moderation/appeal.tpl', $twig_data);
+		if ($_GET['act'] == 'approve') {
+			$db->Execute('DELETE FROM `'.prefix.'bans` WHERE `id` = '.$_GET['id']);
+			$twig_data['msg'] = '<font color="green">Appeal successfully approved!</font>';
+			$twig_data['appeals'] = $db->GetAll('SELECT * FROM `'.prefix.'bans` WHERE `appealed` = 1 AND `deny` = 0');
+			AnonsabaCore::Output('/manage/moderation/appeal.tpl', $twig_data);
+		} elseif ($_GET['act'] == 'deny') {
+			$db->Execute('UPDATE `'.prefix.'bans` SET `deny` = 1 WHERE `id` = '.$_GET['id']);
+			$twig_data['msg'] = '<font color="green">Appeal successfully denied!</font>';
+			$twig_data['appeals'] = $db->GetAll('SELECT * FROM `'.prefix.'bans` WHERE `appealed` = 1 AND `deny` = 0');
+			AnonsabaCore::Output('/manage/moderation/appeal.tpl', $twig_data);
+		} else {
+			$twig_data['appeals'] = $db->GetAll('SELECT * FROM `'.prefix.'bans` WHERE `appealed` = 1 AND `deny` = 0');
+			AnonsabaCore::Output('/manage/moderation/appeal.tpl', $twig_data);
+		}
 	}
 	public static function ExpireBans() {
 		global $db;
