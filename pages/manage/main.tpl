@@ -30,7 +30,7 @@
 			<h2>{{sectionname}}</h2>
 			<ul>
 			{% for i in 0..arraynum %}
-				<li><a href="index.php?side={{current}}{{url[i]}}">{{names[i]}}</a></li>
+				<li><a href="index.php?side={{current}}{{urls[i]}}">{{names[i]}}</a></li>
 			{% endfor %}
 			</ul>
 		</section>

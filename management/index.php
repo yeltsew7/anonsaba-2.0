@@ -25,22 +25,22 @@ if ($management->ValidateSession(true)) {
 		$twig_data['sectionname'] = 'Main';
 		$twig_data['names'] = array('Statistics' , 'Graph', 'Private Messages', 'Show Posting Password', 'Change Account Password');
 		$twig_data['arraynum'] = count($twig_data['names']);
-		$twig_data['url'] = array('&action=stats', '&action=graph', '&action=pms', '&action=pp', '&action=changepass');
+		$twig_data['urls'] = array('&action=stats', '&action=graph', '&action=pms', '&action=pp', '&action=changepass');
 	} elseif ($_GET['side'] == 'site') {
 		$twig_data['sectionname'] = 'Site Administration';
 		$twig_data['names'] = array('News' , 'Rules', 'FAQ', 'Staff', 'Logs', 'Clean up', 'Site configuration');
 		$twig_data['arraynum'] = count($twig_data['names']);
-		$twig_data['url'] = array('&action=news', '&action=rules', '&action=faq', '&action=staff', '&action=logs', '&action=clean', '&action=siteconfig');
+		$twig_data['urls'] = array('&action=news', '&action=rules', '&action=faq', '&action=staff', '&action=logs', '&action=clean', '&action=siteconfig');
 	} elseif ($_GET['side'] == 'boards') {
 		$twig_data['sectionname'] = 'Boards Administration';
 		$twig_data['names'] = array('Add/Delete boards' , 'Board Options', 'Edit filetypes', 'Edit Sections', 'Word filter', 'Spam filter', 'Manage Ads', 'Move threads', 'Rebuild board', 'Rebuild all boards');
 		$twig_data['arraynum'] = count($twig_data['names']);
-		$twig_data['url'] = array('&action=adddelboard', '&action=boardopt', '&action=filetypes', '&action=sections', '&action=wf', '&action=sf', '&action=ads', '&action=movethread', '&action=rebuildboard', '&action=rebuildall');
+		$twig_data['urls'] = array('&action=adddelboard', '&action=boardopt', '&action=filetypes', '&action=sections', '&action=wf', '&action=sf', '&action=ads', '&action=movethread', '&action=rebuildboard', '&action=rebuildall');
 	} elseif ($_GET['side'] == 'mod') {
 		$twig_data['sectionname'] = 'Moderation';
 		$twig_data['names'] = array('View/Add/Delete Bans', 'View Reports', 'View Appeals', 'View Recent Posts');
 		$twig_data['arraynum'] = count($twig_data['names']);
-		$twig_data['url'] = array('&action=bans', '&action=reports', '&action=appeal', '&action=recentpost');
+		$twig_data['urls'] = array('&action=bans', '&action=reports', '&action=appeal', '&action=recentpost');
 	}
 }
 //Run this each time someone logs in...
