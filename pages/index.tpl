@@ -110,7 +110,7 @@ class="ref|{{post.boardname}}|{% if post.parent == 0 %}{{post.id}}{% else %}{{po
 {%if irc != ''%}
 		<h4>&nbsp;IRC</h4>
 	<ul>
-		<li>{{KU_IRC|raw}}</li>
+		<li>{{irc|raw}}</li>
 	</ul>
 <br />
 {%endif%}

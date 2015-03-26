@@ -9,6 +9,7 @@
 	$twig_data['sitename'] = AnonsabaCore::GetConfigOption('sitename');
 	$twig_data['slogan'] = AnonsabaCore::GetConfigOption('slogan');
 	$twig_data['version'] = AnonsabaCore::GetConfigOption('version');
+	$twig_data['irc'] = AnonsabaCore::GetConfigOption('irc');
 	//DONT TOUCH
 	isset($_GET['view']) ? $_GET['view'] : '';
 	if ($_GET['view'] == '') {
