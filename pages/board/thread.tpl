@@ -1,4 +1,4 @@
-	<form id="delform" action="{{KU_WEBFOLDER}}board.php" method="post">
+	<form id="delform" action="{{url}}post.php" method="post">
 	<input type="hidden" name="board" value="{{board.name}}" />
 	{% for post in posts %}
 		{% if post.parent == 0 %}
