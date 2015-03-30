@@ -528,10 +528,10 @@ if ($_POST['subject'] != '') {
 			} elseif (!is_numeric($_POST['order'])) {
 				$twig_data['message'] = '<font color="red">Please enter a number for order</font>';
 			}
-			$twig_data['entry'] = $db->GetAll('SELECT * FROM `'.prefix.'sections`');
+			$twig_data['entry'] = $db->GetAll('SELECT * FROM `'.prefix.'sections` ORDER BY `order` ASC');
 			AnonsabaCore::Output('/manage/board/sections.tpl', $twig_data);
 		} else {
-			$twig_data['entry'] = $db->GetAll('SELECT * FROM `'.prefix.'sections`');
+			$twig_data['entry'] = $db->GetAll('SELECT * FROM `'.prefix.'sections` ORDER BY `order` ASC');
 			AnonsabaCore::Output('/manage/board/sections.tpl', $twig_data);
 		}
 	}
