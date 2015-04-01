@@ -30,22 +30,21 @@ function eggs() {
  }
  </script>
 <td class="strong"><a onclick="eggs()">{{version}}</a></td>
+<td>Twig Version: </td>
+<td class="strong">{{ constant('Twig_Environment::VERSION') }}</td>
+</tr>
+<tr>
+<td>Number of Boards: </td>
+<td class="strong">{{boardnum}}</td>
 <td>Site Memory Usage: </td>
 <td class="strong">{{memory}} MiB</td>
 </tr>
 <tr>
-<td>Number of Boards: </td>
 
-<td class="strong">{{boardnum}}</td>
-<td>Site Peak memory usage: </td>
-<td class="strong">{{peakmemory}} MiB</td>
-</tr>
-<tr>
 <td>Total Posts: </td>
 <td class="strong">{{numpost}}</td>
-<td>Days since last bug: </td>
-
-<td class="strong">Pending</td>
+<td>Site Peak memory usage: </td>
+<td class="strong">{{peakmemory}} MiB</td>
 </tr>
 </tbody>
 </table>
