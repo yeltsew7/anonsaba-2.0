@@ -23,7 +23,7 @@ class Management {
 			$_SESSION['manageusername'] = $_POST['username'];
 			self::CreateSession($_POST['username']);
 			AnonsabaCore::Log($_POST['username'], 'Logged in', time());
-			die('<script type="text/javascript">window.location.href = \'/management/index.php?side='.$side.'&action='.$action.'\';</script>');
+			header("Location: ".url.'/management/index.php?side='.$side.'&action='.$action.'');
 		} else {
 			AnonsabaCore::Log($_POST['username'], 'Failed login Attempt (IP: '.$_SERVER['REMOTE_ADDR'].')', time());
 			AnonsabaCore::Error('Incorrect Username/Password', 'This has been logged');
@@ -31,8 +31,7 @@ class Management {
 	}
 	public static function Logout() {
 		self::DestroySession($_SESSION['manageusername']);
-
-		die('<script type="text/javascript">window.location.href = \'/management/\';</script>');
+		header("Location: ".url.'/management/');
 	}
 	public static function CreateSession($val) {
 		global $db;
