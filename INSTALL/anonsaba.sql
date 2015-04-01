@@ -17,6 +17,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ads`
+--
+
+CREATE TABLE IF NOT EXISTS `ads` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` text NOT NULL,
+  `type` text NOT NULL,
+  `w` int(11) NOT NULL,
+  `h` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `bans`
 --
 
