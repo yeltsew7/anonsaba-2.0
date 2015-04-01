@@ -25,7 +25,7 @@ class Database extends PDO {
 	}
 	public function Execute($query) {
 		$item = $this->exec($query);
-		if(!$item) {
+		if($item === false) {
     			echo "\nPDO::errorInfo():\n";
     			print_r($this->errorInfo());
 			return;

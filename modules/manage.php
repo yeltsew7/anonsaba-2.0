@@ -811,43 +811,51 @@ if ($_POST['subject'] != '') {
 		global $twig_data, $db;
 		$twig_data['boards'] = $db->GetAll('SELECT * FROM `'.prefix.'boards`');
 		if (isset($_POST['submit'])) {
-			$idcount = $db->GetAll('SELECT COUNT(*) FROM `'.prefix.'posts` WHERE `boardname` = '.$db->quote($_POST['newboard']));
-			if ($idcount[0]['COUNT(*)'] == 0) {
-				$newid = 1;
+			if ($_POST['id'] == '') {
+				$twig_data['message'] = '<font color="red">Please enter a Thread ID!</font>';
+			} elseif ($_POST['board'] == $_POST['newboard']) {
+				$twig_data['message'] = '<font color="red">Thread can not be moved to the same board!</font>';
+			} elseif (!$db->GetAll('SELECT * FROM `'.prefix.'posts` WHERE `boardname` = '.$db->quote($_POST['board']).' AND `id` = '.$_POST['id'])) {
+				$twig_data['message'] = '<font color="red">Thread doesn\'t exist!</font>';
 			} else {
-				$newid = $idcount[0]['COUNT(*)'] + 1;
-			}
-			$from = fullpath . $_POST['board'] . '/res/'. $_POST['id'] . '.html';
-			@unlink($from);
-			$image = $db->GetOne('SELECT `file` FROM `'.prefix.'files` WHERE `board` = '.$db->quote($_POST['board']).' AND `id` = '.$_POST['id']);
-			$filetype = $db->GetOne('SELECT `type` FROM `'.prefix.'files` WHERE `board` = '.$db->quote($_POST['board']).' AND `id` = '.$_POST['id']);
-			$from_pic = fullpath . $_POST['board'] . '/src/'. $image . $filetype;
-			$to_pic = fullpath . $_POST['newboard'] . '/src/'. $image . $filetype;
-			@rename($from_pic, $to_pic);
-			@unlink($from_pic);
-			$db->Execute('UPDATE `'.prefix.'posts` SET `id` = '.$newid.', `boardname` = '.$db->quote($_POST['newboard']).' WHERE `id` = '.$_POST['id'].' AND `boardname` = '.$db->quote($_POST['board']));
-			$db->Execute('UPDATE `'.prefix.'files` SET `id` = '.$newid.', `board` = '.$db->quote($_POST['newboard']).' WHERE `id` = '.$_POST['id'].' AND `board` = '.$db->quote($_POST['board']));
-			$posts = $db->GetAll('SELECT * FROM `'.prefix.'posts` WHERE `parent` = '.$_POST['id'].' AND `boardname` = '.$db->quote($_POST['board']));
-			foreach ($posts as $post) {
-				$files = $db->GetAll('SELECT `file`, `type` FROM `'.prefix.'files` WHERE `board` = '.$db->quote($_POST['board']).' AND `id` = '.$post['id']);
-				$rimage = $db->GetOne('SELECT `file` FROM `'.prefix.'files` WHERE `board` = '.$db->quote($_POST['board']).' AND `id` = '.$post['id']);
-				$rtype = $db->GetOne('SELECT `type` FROM `'.prefix.'files` WHERE `board` = '.$db->quote($_POST['board']).' AND `id` = '.$post['id']);
-				$from_pic = fullpath. $_POST['board'] . '/src/'. $rimage . $rtype;
-				$to_pic = fullpath . $_POST['newboard'] . '/src/'. $rimage . $rtype;
+				$idcount = $db->GetAll('SELECT COUNT(*) FROM `'.prefix.'posts` WHERE `boardname` = '.$db->quote($_POST['newboard']));
+				if ($idcount[0]['COUNT(*)'] == 0) {
+					$newid = 1;
+				} else {
+					$newid = $idcount[0]['COUNT(*)'] + 1;
+				}
+				$from = fullpath . $_POST['board'] . '/res/'. $_POST['id'] . '.html';
+				@unlink($from);
+				$image = $db->GetOne('SELECT `file` FROM `'.prefix.'files` WHERE `board` = '.$db->quote($_POST['board']).' AND `id` = '.$_POST['id']);
+				$filetype = $db->GetOne('SELECT `type` FROM `'.prefix.'files` WHERE `board` = '.$db->quote($_POST['board']).' AND `id` = '.$_POST['id']);
+				$from_pic = fullpath . $_POST['board'] . '/src/'. $image . $filetype;
+				$to_pic = fullpath . $_POST['newboard'] . '/src/'. $image . $filetype;
 				@rename($from_pic, $to_pic);
 				@unlink($from_pic);
-				$insert_id = $db->GetOne('SELECT COALESCE(MAX(id),0) + 1 FROM `'.prefix.'posts` WHERE `boardname` = '.$db->quote($_POST['newboard']));
-				$db->Execute('UPDATE `'.prefix.'posts` SET `id` = '.$insert_id.', `boardname` = '.$db->quote($_POST['newboard']).' WHERE `boardname` = '.$db->quote($_POST['board']).' AND `id` = '.$post['id']);
-				$db->Execute('UPDATE `'.prefix.'files` SET `id` = '.$insert_id.', `board` = '.$db->quote($_POST['newboard']).' WHERE `board` = '.$db->quote($_POST['board']).' AND `id` = '.$post['id']);
-				$db->Execute('UPDATE `'.prefix.'posts` SET `parent` = '.$newid.' WHERE `boardname` = '.$db->quote($_POST['newboard']).' AND `id` = '.$insert_id);
+				$db->Execute('UPDATE `'.prefix.'posts` SET `id` = '.$newid.', `boardname` = '.$db->quote($_POST['newboard']).' WHERE `id` = '.$_POST['id'].' AND `boardname` = '.$db->quote($_POST['board']));
+				$db->Execute('UPDATE `'.prefix.'files` SET `id` = '.$newid.', `board` = '.$db->quote($_POST['newboard']).' WHERE `id` = '.$_POST['id'].' AND `board` = '.$db->quote($_POST['board']));
+				$posts = $db->GetAll('SELECT * FROM `'.prefix.'posts` WHERE `parent` = '.$_POST['id'].' AND `boardname` = '.$db->quote($_POST['board']));
+				foreach ($posts as $post) {
+					$files = $db->GetAll('SELECT `file`, `type` FROM `'.prefix.'files` WHERE `board` = '.$db->quote($_POST['board']).' AND `id` = '.$post['id']);
+					$rimage = $db->GetOne('SELECT `file` FROM `'.prefix.'files` WHERE `board` = '.$db->quote($_POST['board']).' AND `id` = '.$post['id']);
+					$rtype = $db->GetOne('SELECT `type` FROM `'.prefix.'files` WHERE `board` = '.$db->quote($_POST['board']).' AND `id` = '.$post['id']);
+					$from_pic = fullpath. $_POST['board'] . '/src/'. $rimage . $rtype;
+					$to_pic = fullpath . $_POST['newboard'] . '/src/'. $rimage . $rtype;
+					@rename($from_pic, $to_pic);
+					@unlink($from_pic);
+					$insert_id = $db->GetOne('SELECT COALESCE(MAX(id),0) + 1 FROM `'.prefix.'posts` WHERE `boardname` = '.$db->quote($_POST['newboard']));
+					$db->Execute('UPDATE `'.prefix.'posts` SET `id` = '.$insert_id.', `boardname` = '.$db->quote($_POST['newboard']).' WHERE `boardname` = '.$db->quote($_POST['board']).' AND `id` = '.$post['id']);
+					$db->Execute('UPDATE `'.prefix.'files` SET `id` = '.$insert_id.', `board` = '.$db->quote($_POST['newboard']).' WHERE `board` = '.$db->quote($_POST['board']).' AND `id` = '.$post['id']);
+					$db->Execute('UPDATE `'.prefix.'posts` SET `parent` = '.$newid.' WHERE `boardname` = '.$db->quote($_POST['newboard']).' AND `id` = '.$insert_id);
+				}
+				$board_core = new BoardCore();
+				$data = $db->GetAll('SELECT * FROM `'.prefix.'boards`');
+				foreach ($data as $line) {
+					$board_core->Board($line['name']);
+					$board_core->RefreshAll();
+				}
+				$twig_data['message'] = '<font color="green">Thread Successfully moved!</font>';
 			}
-			$board_core = new BoardCore();
-			$data = $db->GetAll('SELECT * FROM `'.prefix.'boards`');
-			foreach ($data as $line) {
-				$board_core->Board($line['name']);
-				$board_core->RefreshAll();
-			}
-			$twig_data['message'] = '<font color="green">Thread Successfully moved!</font>';
 		}
 		AnonsabaCore::Output('/manage/board/movethread.tpl', $twig_data);
 	}
