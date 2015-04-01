@@ -201,6 +201,8 @@ class BoardCore {
 		$twig_data['url'] = url;
 		$twig_data['board'] = $this->board;
 		$twig_data['replythread'] = $replythread;
+		$twig_data['sfwads'] = $db->GetAll('SELECT * FROM `'.prefix.'ads` WHERE `type` = "sfw"');
+		$twig_data['nsfwads'] = $db->GetAll('SELECT * FROM `'.prefix.'ads` WHERE `type` = "nsfw"');
 		$header = $twig->render('/board/header.tpl', $twig_data);
 		return $header;
 	}

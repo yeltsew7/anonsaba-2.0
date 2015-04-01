@@ -859,6 +859,27 @@ if ($_POST['subject'] != '') {
 		}
 		AnonsabaCore::Output('/manage/board/movethread.tpl', $twig_data);
 	}
+	public static function ads() {
+		global $db, $twig_data;
+		if ($_GET['do'] == 'del') {
+			$db->Execute('DELETE FROM `'.prefix.'ads` WHERE `id` = '.$_GET['id']);
+			$twig_data['message'] = '<font color="green">Ad successfully deleted!</font>';
+			$twig_data['ads'] = $db->GetAll('SELECT * FROM `'.prefix.'ads`');
+		}
+		if (isset($_POST['submit'])) {
+			$adcheck = $db->GetAll('SELECT * FROM `'.prefix.'ads` WHERE `type` = '.$db->quote($_POST['type']));
+			if (!$adcheck) {
+				$db->Execute('INSERT INTO `'.prefix.'ads` (`url`, `type`, `w`, `h`) VALUES ('.$db->quote($_POST['url']).', '.$db->quote($_POST['type']).', '.$_POST['w'].', '.$_POST['h'].')');
+				$twig_data['message'] = '<font color="green">Ad successfully added!</font>';
+			} else {
+				$twig_data['message'] = '<font color="red">An Ad for '.$_POST['type'].' already exist!</font>';
+			}
+			$twig_data['ads'] = $db->GetAll('SELECT * FROM `'.prefix.'ads`');
+		} else {
+			$twig_data['ads'] = $db->GetAll('SELECT * FROM `'.prefix.'ads`');
+		}
+		AnonsabaCore::Output('/manage/board/ads.tpl', $twig_data);
+	}
 	public static function ExpireBans() {
 		global $db;
 		$time = time();
