@@ -13,8 +13,8 @@
 {% endif %}
 {% if do != 'edit' %}
 <form method="POST" action="index.php?side={{current}}&action=news">
-<tr><td>Email: <input type="text" name="email">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>CAN BE LEFT BLANK</b>
 <tr><td>Subject: <input type="text" name="subject">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>CAN NOT BE LEFT BLANK</b></td></tr>
+<tr><td>Email: <input type="text" name="email">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>CAN BE LEFT BLANK</b>
 <tr><td><label for="message">Message:</label> <textarea id="message" name="message" rows="25" cols="80"></textarea></tr><td>
 <tr><td><input type="submit" name="submit" value="Submit"></tr></td>
 <input type="hidden" id="edit" name="edit" value="" />
@@ -43,8 +43,8 @@
 {% else %}
 {% for item in entry %}
 <form method="post" action="index.php?side={{current}}&action=news&do=edit&id={{item.id}}">
-<tr><td>Email: <input type="text" name="email" value="{{item.email}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>CAN BE LEFT BLANK</b>
 <tr><td>Subject: <input type="text" name="subject" value="{{item.subject}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>CAN NOT BE LEFT BLANK</b></td></tr>
+<tr><td>Email: <input type="text" name="email" value="{{item.email}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>CAN BE LEFT BLANK</b>
 <tr><td><label for="message">Message:</label> <textarea id="message" name="message" rows="25" cols="80">{{item.message}}</textarea></tr><td>
 <tr><td><input type="submit" name="submit" value="Submit"></tr></td>
 <input type="hidden" id="edit" name="edit" value="{{item.id}}" />
