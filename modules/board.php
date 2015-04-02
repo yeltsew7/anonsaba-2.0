@@ -234,7 +234,8 @@ class BoardCore {
 	public function Footer($executiontime) {
 		global $db, $twig, $twig_data;
 		$footer = '';
-		$twig_data['version'] = '2.0';
+		$twig_data['version'] = AnonsabaCore::GetConfigOption('version');
+		$twig_data['sitename'] = AnonsabaCore::GetConfigOption('sitename');
 		if ($executiontime != ''){ 
 			$twig_data['executiontime'] = round($executiontime, 4);
 		}
