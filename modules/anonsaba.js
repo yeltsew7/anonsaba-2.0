@@ -170,7 +170,7 @@ function delandbanlinks() {
 				xmlhttp.open("GET","/management/index.php?action=getip&board="+dnbinfo[1]+"&id="+dnbinfo[2],false);
 				xmlhttp.send();
 				var ip = xmlhttp.responseText;
-				dnbelements[i].innerHTML = " [IP: "+ip.replace('::ffff:', '') +" <a href='/management/index.php?side=mod&action=delip&ip="+xmlhttp.responseText+"' title='Delete all posts by this IP' target='_blank'>D</a>] [<a href='/management/index.php?side=mod&action=del&id="+dnbinfo[2]+"&boardname="+dnbinfo[1]+"' target='_blank'>D</a> <a href='/management/index.php?side=mod&action=delban&ip="+xmlhttp.responseText+"&boardname="+dnbinfo[1]+"' target='_blank'>&</a> <a href='/management/index.php?side=mod&action=bans&do=ban&ip="+xmlhttp.responseText+"&boardname="+dnbinfo[1]+"' target='_blank'>B</a>]";
+				dnbelements[i].innerHTML = " [IP: "+ip.replace('::ffff:', '') +" <a href='/management/index.php?side=mod&action=delip&ip="+xmlhttp.responseText+"' title='Delete all posts by this IP' target='_blank'>D</a>] [<a href='/management/index.php?side=mod&action=del&id="+dnbinfo[2]+"&boardname="+dnbinfo[1]+"' target='_blank'>D</a> <a href='/management/index.php?side=mod&action=delban&ip="+xmlhttp.responseText+"&boardname="+dnbinfo[1]+"' target='_blank'>&</a> <a href='/management/index.php?side=mod&action=bans&do=ban&ip="+xmlhttp.responseText+"&boardname="+dnbinfo[1]+"&id="+dnbinfo[2]+"' target='_blank'>B</a>]";
 			}
 		}
 	}

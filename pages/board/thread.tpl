@@ -52,6 +52,9 @@
 					{% else %}
 						{{post.message|nl2br}}
 					{% endif %}
+					{% if post.banmessage != '' %}
+						<br /><br />{{post.banmessage|raw}}
+					{% endif %}
 				</blockquote>
 				<br />
 		{% else %}
@@ -108,6 +111,9 @@
 									{{post.message|raw}}
 								{% else %}
 									{{post.message|nl2br}}
+								{% endif %}
+								{% if post.banmessage != '' %}
+									<br /><br />{{post.banmessage|raw}}
 								{% endif %}
 							</blockquote>
 					</td>

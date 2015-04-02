@@ -25,5 +25,16 @@
 <div class="logo">
 	/{{board.name}}/ - {{board.desc}}
 </div>
-{{board.header|raw}}
+{{board.header|raw}}<br />
+<center>
+{% if board.class == 2 %}
+	{% for nsfwad in nsfwads %}
+		<img src="{{nsfwad.url}}" height="{{nsfwad.h}}" width="{{nsfwad.w}}">
+	{% endfor %}
+{% else %}
+	{% for sfwad in sfwads %}
+		<img src="{{sfwad.url}}" height="{{sfwad.h}}" width="{{sfwad.w}}">
+	{% endfor %}
+{% endif %}
+</center>
 <hr /><a name="top"></a>

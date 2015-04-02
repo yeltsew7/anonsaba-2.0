@@ -83,6 +83,9 @@
 					{% else %}
 						{{post.message|nl2br}}
 					{% endif %}
+					{% if post.banmessage != '' %}
+						<br /><br />{{post.banmessage|raw}}
+					{% endif %}
 				</blockquote>
 				<span class="omittedposts">
 					{% if post.sticky == 1 and post.replies > 1 %}
@@ -182,6 +185,9 @@
 									{{post.message|raw}}
 								{% else %}
 									{{post.message|nl2br}}
+								{% endif %}
+								{% if post.banmessage != '' %}
+									<br /><br />{{post.banmessage|raw}}
 								{% endif %}
 							</blockquote>
 						</td>

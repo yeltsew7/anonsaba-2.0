@@ -626,6 +626,7 @@ if ($_POST['subject'] != '') {
 	public static function del() {
 		global $db;
 		$db->Execute('DELETE FROM `'.prefix.'posts` WHERE `id` = '.$_GET['id'].' AND `boardname` = '.$db->quote($_GET['boardname']));
+		$db->Execute('DELETE FROM `'.prefix.'posts` WHERE `parent` = '.$_GET['id'].' AND `boardname` = '.$db->quote($_GET['boardname']));
 		$board_core = new BoardCore();
 		$board_core->Board($_GET['boardname']);
 		$board_core->RefreshAll();
@@ -761,6 +762,12 @@ if ($_POST['subject'] != '') {
 				if (implode('|', $ban_boards) != '') {
 					if ($_POST['until'] != '') {
 						$db->Execute('INSERT INTO `'.prefix.'bans` (`ip`, `boards`, `reason`,  `until`, `appeal`) VALUES ('.$db->quote($_POST['ip']).','.$db->quote(implode('|', $ban_boards)).', '.$db->quote($_POST['reason']).', '.strtotime($_POST['until']).', '.$appeal.')');
+						if (isset($_GET['boardname'])) {
+							$db->Execute('UPDATE `'.prefix.'posts` SET `banmessage` = '.$db->quote($_POST['bm1']).', `rw` = 1 WHERE `ip` = '.$db->quote($_GET['ip']).' AND `id` = '.$_GET['id'].' AND `boardname` = '.$db->quote($_GET['boardname']));
+							$board_core = new BoardCore();
+							$board_core->Board($_GET['boardname']);
+							$board_core->RefreshAll();
+						}
 						$twig_data['msg'] = '<font color="green">'.$_POST['ip'].' successfully banned!</font>';
 					} else {
 						$twig_data['msg'] = '<font color="red">Please enter a ban duration.</font>';
