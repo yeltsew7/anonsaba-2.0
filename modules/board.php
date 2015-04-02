@@ -201,8 +201,20 @@ class BoardCore {
 		$twig_data['url'] = url;
 		$twig_data['board'] = $this->board;
 		$twig_data['replythread'] = $replythread;
+		$twig_data['section'] = $db->GetAll('SELECT * FROM `'.prefix.'sections`');
 		$twig_data['sfwads'] = $db->GetAll('SELECT * FROM `'.prefix.'ads` WHERE `type` = "sfw"');
 		$twig_data['nsfwads'] = $db->GetAll('SELECT * FROM `'.prefix.'ads` WHERE `type` = "nsfw"');
+		$output = '';
+		$results = $db->GetAll('SELECT `name` FROM `'.prefix.'sections` ORDER BY `order` ASC');
+		$boards = array();
+		foreach($results as $line) {
+			$results2 = $db->GetAll('SELECT * FROM `'.prefix.'boards` WHERE `section` = '.$db->quote($line['name']).' ORDER BY `name` ASC');
+			foreach($results2 as $line2) {
+				$boards[$line['name']][$line2['name']]['name'] = htmlspecialchars($line2['name']);
+				$boards[$line['name']][$line2['name']]['desc'] = htmlspecialchars($line2['desc']);
+			}
+		}
+		$twig_data['boards'] = $boards;
 		$header = $twig->render('/board/header.tpl', $twig_data);
 		return $header;
 	}
