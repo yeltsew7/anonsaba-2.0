@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.0.10deb1
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Mar 25, 2015 at 09:11 PM
--- Server version: 5.5.41-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.6
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -46,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `bans` (
   `appealmsg` text NOT NULL,
   `deny` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 -- --------------------------------------------------------
 
@@ -82,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `boards` (
   `popular` int(11) NOT NULL DEFAULT '0',
   `recentpost` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=118 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=131 ;
 
 -- --------------------------------------------------------
 
@@ -95,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `board_filetypes` (
   `boardid` int(11) NOT NULL,
   `fileid` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=502 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=559 ;
 
 -- --------------------------------------------------------
 
@@ -108,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `expiredbans` (
   `ip` mediumtext NOT NULL,
   `reason` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -154,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `front` (
   `message` varchar(9999) NOT NULL,
   `date` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 -- --------------------------------------------------------
 
@@ -168,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `message` varchar(999) NOT NULL,
   `time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1543 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1585 ;
 
 -- --------------------------------------------------------
 
@@ -215,6 +206,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `cleared` int(11) NOT NULL DEFAULT '0',
   `report` int(11) NOT NULL,
   `reportmsg` text NOT NULL,
+  `banmessage` text NOT NULL,
   KEY `id` (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
@@ -231,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `sections` (
   `name` varchar(999) NOT NULL,
   `hidden` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
