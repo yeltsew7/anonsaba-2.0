@@ -1,0 +1,13 @@
+#static
+/*/*.html
+/*/res
+/*/src
+
+#don't overwrite config
+/config/config.php
+
+/.installed
+
+.htaccess
+favicon.ico
+
